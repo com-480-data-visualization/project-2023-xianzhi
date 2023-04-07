@@ -70,7 +70,7 @@ Although previous works provide us with a lot of inspiration for the project, we
 
 #### References:
 * [1] https://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-data
-* [2] 
+* [2] https://flourish.studio/blog/3d-region-maps/
 * [3] https://www.kaggle.com/code/upadorprofzs/understand-your-data-airbnb-reservations
 * [4] https://www.kaggle.com/code/dgomonov/data-exploration-on-nyc-airbnb
 * [5] https://www.kaggle.com/code/chirag9073/airbnb-analysis-visualization-and-prediction
