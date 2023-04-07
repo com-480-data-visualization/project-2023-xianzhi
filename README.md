@@ -43,14 +43,17 @@ Our dataset consists of 48,895 records, all of which are clean and valid, meanin
 
 For different districts, both average prices and median prices are different. Among all the districts, Manhattan has the highest mean price of 196.8 while the Bronx has the lowest mean price of 87.49
 
-
+![alt text](https://github.com/com-480-data-visualization/project-2023-xianzhi/blob/master/table1.png)
 
 As for room types, most of the rooms are entire homes or apartments, there are slightly fewer rooms being private rooms, and shared rooms are significantly rare.
 
+![alt text](https://github.com/com-480-data-visualization/project-2023-xianzhi/blob/master/room_type.png)
 
 We also found that the number of reviews is correlated with price. The higher the price, the lower the number of reviews.
 
+![alt text](https://github.com/com-480-data-visualization/project-2023-xianzhi/blob/master/no_reviews.png)
 
+![alt text](https://github.com/com-480-data-visualization/project-2023-xianzhi/blob/master/ols.png)
 
 These initial statistics give us a general understanding of the scope and contents of our dataset. We can use this information as a starting point to further explore and analyze the data.
 
@@ -59,10 +62,12 @@ These initial statistics give us a general understanding of the scope and conten
 In Kaggle, we can easily find some works that are based on this specific data set, like Understand your data 🎲 | airbnb reservations [3], Data Exploration on NYC Airbnb [4], Airbnb Analysis, Visualization and Prediction [5]. The previous works mainly analyze the 
 statistical properties of the dataset rather than visualize them.  While they also provide lots of fancy data demonstrations like Fig 1[3] and Fig 2 [3]  have shown.
 
+![alt text](https://github.com/com-480-data-visualization/project-2023-xianzhi/blob/master/fr_neighbourhood.png)
 
 Fig. 1 The 10 most frequent neighborhoods in the dataset
 
 
+![alt text](https://github.com/com-480-data-visualization/project-2023-xianzhi/blob/master/loc_dist.png)
 
 Fig.2 Location distribution of rooms on Airbnb
 
