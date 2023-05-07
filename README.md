@@ -86,7 +86,7 @@ Although previous works provide us with a lot of inspiration for the project, we
 
 ### Introduction 
 
-Our goal for the second milestone is to have a first skeleton of the website on 3D visualization of Airbnb data of New York city for the year 2019, in addition to details of the visualizations that we plan to implement.
+Our goal for the second milestone is to have a primary skeleton of our website on 3D visualization of Airbnb data of New York City for the year 2019, in addition to details of the visualizations that we plan to implement.
 
 ### Tools
 
@@ -94,7 +94,7 @@ Our visualization combines different libraries. The major library we use is ArcG
 
 ### Lectures
 
-The previous lectures about JavaScript will prove useful in creating our visualization since our main visualization is written in JavaScript. Besides, the lectures on D3.js are very useful to us since we will use the same library. In addition, the Designing viz and Maps lectures can bring us inspirations when we design the details of our visualization of our map.
+The previous lectures about JavaScript will prove useful in creating our visualization since our main visualization is written in JavaScript. Besides, the lectures on D3.js are very useful to us since we will use the same library. In addition, the Designing Viz and Maps lectures can bring us inspiration when we design the details of the visualization of our map.
 
 ### Pieces to implement
 
@@ -113,7 +113,7 @@ Sketches
 
 Fig. 3 The primary 3D map of Manhattan
 
-### Reference
+### References
 [1] https://github.com/Esri/Manhattan-skyscraper-explorer
 
 ## Milestone 3 (4th June, 5pm)
