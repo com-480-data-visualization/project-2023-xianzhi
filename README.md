@@ -113,7 +113,8 @@ Sketches
 
 Fig. 3 The primary 3D map of Manhattan
 
-
+### Reference
+[1] https://github.com/Esri/Manhattan-skyscraper-explorer
 
 ## Milestone 3 (4th June, 5pm)
 
