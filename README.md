@@ -109,6 +109,9 @@ If time permits, we would also like to analyze the reviews and visualize them as
 We would also like to include plots that will compare different neighborhoods: which ones have the highest prices, the best reviews, etc.
 
 Sketches
+![alt text](https://github.com/com-480-data-visualization/project-2023-xianzhi/blob/master/sketch.png)
+
+Fig. 3 The primary 3D map of Manhattan
 
 
 
