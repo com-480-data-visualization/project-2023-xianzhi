@@ -644,21 +644,6 @@ button.on("click", function() {
      updateMap();
    });
 
-   d3.select("#scale3").on("click", function() {
-     currentScaleIndex = 2;
-     updateMap();
-   });
-
-   d3.select("#scale4").on("click", function() {
-     currentScaleIndex = 3;
-     updateMap();
-   });
-
-   d3.select("#scale5").on("click", function() {
-     currentScaleIndex = 4;
-     updateMap();
-   });
-
    // Initial map rendering
    initializeMap();
 
