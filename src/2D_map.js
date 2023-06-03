@@ -1,5 +1,5 @@
  // Load the GeoJSON file
- d3.json("Borough Boundaries.geojson")
+ d3.json("data/Borough Boundaries.geojson")
  .then(function(data) {
    // Create an SVG element
 var svg = d3.select("#map");
