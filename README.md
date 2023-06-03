@@ -84,8 +84,37 @@ Although previous works provide us with a lot of inspiration for the project, we
 
 ## Milestone 2 (7th May, 5pm)
 
-**10% of the final grade**
+### Introduction 
 
+Our goal for the second milestone is to have a primary skeleton of our website on 3D visualization of Airbnb data of New York City for the year 2019, in addition to details of the visualizations that we plan to implement.
+
+### Tools
+
+Our visualization combines different libraries. The major library we use is ArcGIS Maps SDK for JavaScript, which offers a collection of APIs that are suitable for geographic data management, geographic analysis and map visualization. In addition, we also want to provide charts and plots to bring more insights to the users, and thus we chose D3.js which has been introduced in the lecture to help manage our csv dataset and create dynamic and interactive charts and plots on our webpage. There are potentially other libraries we want to use in the future.
+
+### Lectures
+
+The previous lectures about JavaScript will prove useful in creating our visualization since our main visualization is written in JavaScript. Besides, the lectures on D3.js are very useful to us since we will use the same library. In addition, the Designing Viz and Maps lectures can bring us inspiration when we design the details of the visualization of our map.
+
+### Pieces to implement
+
+Our core visualization (minimal viable product) will be the 3D Map of New York City, showing the heights of buildings according to their prices. 
+We plan to make this map interactive, allowing users to move around and zoom in on specific regions of interest.
+Additionally, there will be a drop-down menu on the website to filter to a particular neighborhood, and filter by minimum nights required, according to the user’s needs.
+Furthermore, by clicking on a specific building, there will be a dashboard on the side showing additional visualizations of the specific Airbnb residence. These visualizations will include: bar charts that show the availability of the residence for the last 365 days, the host name and the average number of reviews.
+
+### Extra ideas
+
+If time permits, we would also like to analyze the reviews and visualize them as word clouds showing the most common word used to describe users’ experience in a specific residence.
+We would also like to include plots that will compare different neighborhoods: which ones have the highest prices, the best reviews, etc.
+
+Sketches
+![alt text](https://github.com/com-480-data-visualization/project-2023-xianzhi/blob/master/sketch.png)
+
+Fig. 3 The primary 3D map of Manhattan
+
+### References
+[1] https://github.com/Esri/Manhattan-skyscraper-explorer
 
 ## Milestone 3 (4th June, 5pm)
 
