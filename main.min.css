@@ -150,7 +150,7 @@ main {
 
 .container {
     position: relative;
-    height: 150%;
+    height: 190%;
 }
 .container2 {
     position: relative;
@@ -286,7 +286,7 @@ main {
     font-weight: 700;
     display: block;
     width: 100%;
-    padding: 0 3rem 3rem;
+    padding: 4rem 3rem 3rem;
     margin: 0 0 0 auto
 }
 

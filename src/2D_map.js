@@ -39,6 +39,10 @@ d3.json("data/Borough Boundaries.geojson")
 			{ x: 0, y: 0 },
 			{ x: 0, y: 0 },
 		];
+		var tooltip = d3.select("body")
+						.append("div")
+						.attr("class", "tooltip")
+						.style("opacity", 0);
 
         var currentScaleIndex = 0; // Index of the currently selected scale
 		// Set the transition duration in milliseconds
@@ -189,6 +193,13 @@ d3.json("data/Borough Boundaries.geojson")
 				.attr('y', (d,i) => targetLocations[d.index].y + normed[d.index] + 20)
 				.attr("font-size", 20);
 
+			// Show the tooltip with the name of the shape
+			tooltip.transition()
+				.duration(200)
+				.style("opacity", 0.9);
+			tooltip.html(i.name)
+				.style("left", (d3.event.pageX + 10) + "px")
+				.style("top", (d3.event.pageY - 20) + "px");
 		}
 		function MouseClick(d, i) {
 			if(!moved){
@@ -231,6 +242,10 @@ d3.json("data/Borough Boundaries.geojson")
 				.duration(transitionDuration)
 				.attr("fill-opacity", 0.3); // Adjust the opacity as desired
 
+			// Hide the tooltip
+			tooltip.transition()
+				.duration(200)
+				.style("opacity", 0);
 		}
 
 		function updateMap() {
@@ -273,7 +288,7 @@ d3.json("data/Borough Boundaries.geojson")
 						.attr("x2", chart_start)
 						.transition()
 						.duration(1000)
-						.attr("x2", hline_end + chart_start)
+						.attr("x2", 1050 + chart_start)
 						.attr("fill-opacity", 0.05);
 
 					svg.selectAll("line_2")
@@ -391,15 +406,14 @@ d3.json("data/Borough Boundaries.geojson")
 
 		// Define the target locations for each shape
 		var line_start = 600;
-		var chart_start = 150;
-		var hline_end = 1150;
 		var targetLocations = [
-			{ x: chart_start + 110, y: line_start, index: 0 },
-			{ x: chart_start + 330, y: line_start, index: 1  },
-			{ x: chart_start + 550, y: line_start, index: 2  },
-			{ x: chart_start + 770, y: line_start, index: 3  },
-			{ x: chart_start + 990, y: line_start, index: 4  },
+			{ x: 200, y: line_start, index: 0 },
+			{ x: 400, y: line_start, index: 1  },
+			{ x: 600, y: line_start, index: 2  },
+			{ x: 800, y: line_start, index: 3  },
+			{ x: 1000, y: line_start, index: 4  },
 		];
+		var chart_start = 100;
 
 		var moved = false;
 		var normed = [];
@@ -480,7 +494,7 @@ d3.json("data/Borough Boundaries.geojson")
 					.attr("x2", chart_start)
 					.transition()
 					.duration(1000)
-					.attr("x2", hline_end + chart_start)
+					.attr("x2", 1050 + chart_start)
 					.attr("fill-opacity", 0.05);
 
 				svg.selectAll("line_2")
@@ -565,7 +579,7 @@ d3.json("data/Borough Boundaries.geojson")
 				svg.append("line")
 					.attr("x1", chart_start )
 					.attr("y1", line_start)
-					.attr("x2", hline_end + chart_start)
+					.attr("x2", 1050 + chart_start)
 					.attr("y2", line_start)
 					.attr("stroke", "black")
 					.attr("stroke-opacity", opacity)

@@ -36,12 +36,19 @@ define([
   "esri/layers/SceneLayer",
   "esri/layers/FeatureLayer",
   "esri/rest/support/Query",
+  "esri/layers/GraphicsLayer",
+  "esri/widgets/Zoom",
+  "esri/widgets/Home",
+  "esri/widgets/DirectLineMeasurement3D",
+  "esri/widgets/AreaMeasurement3D",
+  "esri/geometry/SpatialReference",
 
   "app/RendererGenerator",
   "app/HeightGraph",
   "app/Timeline",
   "app/InfoWidget",
   "app/labels",
+  "app/Marker",
   "app/searchWidget",
   "app/categorySelection",
 
@@ -49,8 +56,8 @@ define([
   "dojo/on",
   "dojo/query"
 ], function(declare, Accessor, watchUtils,
-  Map, SceneView, SceneLayer, FeatureLayer, Query,
-  RendererGenerator, HeightGraph, Timeline, InfoWidget, labels, searchWidget, categorySelection,
+  Map, SceneView, SceneLayer, FeatureLayer, Query,GraphicsLayer,Zoom, Home,DirectLineMeasurement3D,AreaMeasurement3D,SpatialReference,
+  RendererGenerator, HeightGraph, Timeline, InfoWidget, labels, marker, searchWidget, categorySelection,
   dom, on, domQuery
 ) {
   return declare(null, {
@@ -78,7 +85,6 @@ define([
      */
 
     init: function(containers) {
-
       var settings = this.settings;
       var state = this.state;
 
@@ -89,8 +95,13 @@ define([
       // create map
       var map = new Map({
         basemap: "gray",
-        ground: "world-elevation"
+        ground: "world-elevation",
+        spatialReference: new SpatialReference({ wkid: 4326 })
       });
+      var layer = new SceneLayer({
+        url: "https://tiles.arcgis.com/tiles/P3ePLMYs2RVChkJx/arcgis/rest/services/Buildings_NewYork_17/SceneServer"
+      });
+      map.add(layer);
 
       // create view
       var view = new SceneView({
@@ -133,11 +144,71 @@ define([
         }
       });
 
-      // remove navigation widgets from upper left corner
-      view.ui.empty("top-left");
 
       // set view on the window for debugging
       window.view = view;
+      var homeWidget = new Home({
+        view: view
+      });
+
+      view.ui.add(homeWidget, "top-left");
+
+      document.getElementById("distanceButton").addEventListener("click",
+        function () {
+          setActiveWidget(null);
+          if (!this.classList.contains('active')) {
+            setActiveWidget('distance');
+          } else {
+            setActiveButton(null);
+          }
+        });
+      document.getElementById("areaButton").addEventListener("click",
+        function () {
+          setActiveWidget(null);
+          if (!this.classList.contains('active')) {
+            setActiveWidget('area');
+          } else {
+            setActiveButton(null);
+          }
+        });
+      var activeWidget = null;
+      function setActiveWidget(type) {
+        switch (type) {
+          case "distance":
+            activeWidget = new DirectLineMeasurement3D({
+              view: view
+            });
+            view.ui.add(activeWidget, "top-right");
+            setActiveButton(document.getElementById('distanceButton'));
+            break;
+          case "area":
+            activeWidget = new AreaMeasurement3D({
+              view: view
+            });
+            view.ui.add(activeWidget, "top-right");
+            setActiveButton(document.getElementById('areaButton'));
+            break;
+          case null:
+            if (activeWidget) {
+              view.ui.remove(activeWidget);
+              activeWidget.destroy();
+              activeWidget = null;
+            }
+            break;
+        }
+        }
+        function setActiveButton(selectedButton) {
+        // focus the view to activate keyboard shortcuts for sketching
+        view.focus();
+        var elements = document.getElementsByClassName("active");
+        for (var i = 0; i < elements.length; i++) {
+          elements[i].classList.remove("active");
+        }
+        if (selectedButton) {
+          selectedButton.classList.add("active");
+        }
+      }
+
 
       // we set an initial filter to display only buildings whose height is between minHeight and maxHeight
       var filter = [settings.buildingOptions.minHeight, settings.buildingOptions.maxHeight];
@@ -172,15 +243,14 @@ define([
       });
 
       map.addMany([sceneLayer, infoPoints]);
+      marker.DrawPoint(view);
 
       // add labels to display Manhattan boroughs
       labels.initialize("./data/manhattan-boroughs.json", "name", { color: "#fff" }, map);
 
-      // initialize info widget
-      var infoWidget = new InfoWidget(view, state);
 
       // initialize search widget
-      searchWidget.initialize(view, infoPoints, "NAME", state);
+      //searchWidget.initialize(view, "NAME", state);
 
       // create a query on the infoPoints layer to get all the buildings that will be displayed in the height graph
       var query = infoPoints.createQuery();
@@ -197,9 +267,9 @@ define([
           toLowerCase(results.features[i]);
         }
         buildings = results.features;
-        categorySelection.initialize(containers.categories, settings, state);
-        heightGraph = new HeightGraph(containers.heightGraph, settings, buildings, state);
-        timeline = new Timeline(containers.timeline, settings, state);
+        //categorySelection.initialize(containers.categories, settings, state);
+        //heightGraph = new HeightGraph(containers.heightGraph, settings, buildings, state);
+        //timeline = new Timeline(containers.timeline, settings, state);
         state.selectedPeriod = settings.initPeriod;
       }
 
@@ -207,9 +277,9 @@ define([
         // update building symbology
         rendererGen.applyClassBreaksRenderer(newPeriod);
         // update height graph
-        heightGraph.updatePeriod(newPeriod);
+        //heightGraph.updatePeriod(newPeriod);
         // update timeline
-        timeline.update(newPeriod);
+        //timeline.update(newPeriod);
       });
 
       view.whenLayerView(sceneLayer)
@@ -226,7 +296,7 @@ define([
             }
             if (feature) {
               // highlight on hover in the height graph
-              heightGraph.select(feature);
+              //heightGraph.select(feature);
               // highlight feature on the map
               selectHighlight = lv.highlight([feature.attributes.objectid]);
               // zoom to the building in the map
@@ -262,9 +332,9 @@ define([
               }).catch(console.error);
 
               // hide the search widget to show the popup
-              domQuery(".esri-component.esri-search.esri-widget")[0].style.display = "none";
+              //domQuery(".esri-component.esri-search.esri-widget")[0].style.display = "none";
               // display information about the building in the popup
-              infoWidget.setContent(feature.geometry, feature.attributes);
+              //infoWidget.setContent(feature.geometry, feature.attributes);
 
             }
           });
@@ -296,7 +366,6 @@ define([
 
       // when user clicks on a building, set it as the selected building in the state
       view.on("click", function(event) {
-        alert(event.screenPoint[0])
         view.hitTest(event.screenPoint).then(function(response) {
           var graphic = response.results.length > 0 ? response.results[0].graphic : null;
           if (graphic && (graphic.layer.title === "Buildings Manhattan wiki")) {
@@ -316,9 +385,9 @@ define([
       }
 
       // remove hovered building when mouse is outside of map
-      on(dom.byId("menuDiv"), "mouseenter", function() {
-        state.hoveredBuilding = null;
-      });
+//      on(dom.byId("menuDiv"), "mouseenter", function() {
+//        state.hoveredBuilding = null;
+//      });
       on(domQuery(".esri-popup__main-container"), "mouseenter", function() {
         state.hoveredBuilding = null;
       });
