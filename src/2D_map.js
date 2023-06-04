@@ -273,7 +273,7 @@ d3.json("data/Borough Boundaries.geojson")
 						.attr("x2", chart_start)
 						.transition()
 						.duration(1000)
-						.attr("x2", 1050 + chart_start)
+						.attr("x2", hline_end + chart_start)
 						.attr("fill-opacity", 0.05);
 
 					svg.selectAll("line_2")
@@ -391,14 +391,15 @@ d3.json("data/Borough Boundaries.geojson")
 
 		// Define the target locations for each shape
 		var line_start = 600;
+		var chart_start = 150;
+		var hline_end = 1150;
 		var targetLocations = [
-			{ x: 200, y: line_start, index: 0 },
-			{ x: 400, y: line_start, index: 1  },
-			{ x: 600, y: line_start, index: 2  },
-			{ x: 800, y: line_start, index: 3  },
-			{ x: 1000, y: line_start, index: 4  },
+			{ x: chart_start + 110, y: line_start, index: 0 },
+			{ x: chart_start + 330, y: line_start, index: 1  },
+			{ x: chart_start + 550, y: line_start, index: 2  },
+			{ x: chart_start + 770, y: line_start, index: 3  },
+			{ x: chart_start + 990, y: line_start, index: 4  },
 		];
-		var chart_start = 100;
 
 		var moved = false;
 		var normed = [];
@@ -479,7 +480,7 @@ d3.json("data/Borough Boundaries.geojson")
 					.attr("x2", chart_start)
 					.transition()
 					.duration(1000)
-					.attr("x2", 1050 + chart_start)
+					.attr("x2", hline_end + chart_start)
 					.attr("fill-opacity", 0.05);
 
 				svg.selectAll("line_2")
@@ -564,7 +565,7 @@ d3.json("data/Borough Boundaries.geojson")
 				svg.append("line")
 					.attr("x1", chart_start )
 					.attr("y1", line_start)
-					.attr("x2", 1050 + chart_start)
+					.attr("x2", hline_end + chart_start)
 					.attr("y2", line_start)
 					.attr("stroke", "black")
 					.attr("stroke-opacity", opacity)
