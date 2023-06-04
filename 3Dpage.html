@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,4 +8,89 @@
 <body>
 
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D Visualization</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.21/esri/css/main.css">
+
+    <!-- Load AMD modules: the application itself and D3  -->
+    <script>
+        var locationPath = location.pathname.replace(/\/[^\/]+$/, "");
+        var dojoConfig = {
+        packages: [{
+            name: "d3",
+            location: locationPath + "/lib",
+            main: "d3"
+        }, {
+            name: "app",
+            location: locationPath + "/app"
+        }],
+        async: true
+        };
+    </script>
+    <!-- ArcGIS JavaScript API 4.21  -->
+    <script src="https://js.arcgis.com/4.21/"></script>
+
+    <!-- load Galleria and JQuery for the image gallery -->
+    <script src="./lib/jquery.js"></script>
+    <script src="./lib/galleria/galleria.js"></script>
+  <script>
+    require([
+      "app/Application",
+      "dojo/domReady!"
+    ], function (Application) {
+
+      // general application settings like colors and initial settings
+      var settings = {
+        ageClasses: [
+          { minValue: 1900, maxValue: 1924, color: [153, 167, 204] },
+          { minValue: 1925, maxValue: 1949, color: [149, 184, 214] },
+          { minValue: 1950, maxValue: 1974, color: [153, 204, 203] },
+          { minValue: 1975, maxValue: 1999, color: [153, 204, 179] },
+          { minValue: 2000, maxValue: 2024, color: [175, 206, 152] }
+        ],
+        defaultColor: [230, 230, 230, 1],
+        highlightOptions: {
+          color: [255, 255, 0, 1],
+          fillOpacity: 0.4
+        },
+        buildingOptions: {
+          minHeight: 0,
+          maxHeight: 1500,
+          minCnstrctYear: 1900,
+          maxCnstrctYear: 2024
+        },
+        initPeriod: [true, true, true, true, true],
+        categories: [{
+          value: "all",
+          text: "Show all buildings"
+        }, {
+          value: "info",
+          text: "Only annotated buildings"
+        }, {
+          value: "top",
+          text: "Top 20 buildings"
+        }],
+        initCategory: "all",
+        infoPointsUrl: "https://services2.arcgis.com/cFEFS0EWrhfDeVw9/ArcGIS/rest/services/Centroids_Manhattan_Information/FeatureServer/0",
+        buildingsUrl: "https://tiles.arcgis.com/tiles/cFEFS0EWrhfDeVw9/arcgis/rest/services/Buildings_Manhattan/SceneServer"
+      };
+
+      // initialize application
+      var app = new Application(settings);
+      app.init({ view: "viewDiv", timeline: "timeDiv", heightGraph: "heightDiv", categories: "categoryDiv" });
+    });
+  </script>
+
+</head>
+<body>
+    <div id="viewDiv"></div>
+
+
+</body>
+>>>>>>> b0b55d6d8bb995fbb75c3b3269a4e1ec4209ef9f
 </html>
