@@ -11,6 +11,7 @@ d3.json("data/Borough Boundaries.geojson")
           .translate([800 / 2, 600 / 2]) // SVG space
           .precision(.1);
 
+		var Discription = ["Area in Sqr. Meter", "Num. of Airbnb Posts", "Avg. Price / Night in Dollar"];
         var colors = ["steelblue", "green", "red", "orange", "purple"];
 		var darkerColors = colors.map(function(color) {
 			var rgb = d3.rgb(color);
@@ -86,6 +87,7 @@ d3.json("data/Borough Boundaries.geojson")
 						.attr("fill-opacity", opacity)
 						.attr("stroke", "white")
 						.on("mouseover", MouseOver)
+						.on("click", MouseClick)
 						.on("mouseout", MouseOut);
 						
 					districts = svg.selectAll("path");
@@ -141,7 +143,7 @@ d3.json("data/Borough Boundaries.geojson")
 		};
 		var currentShape = 0;
 
-		function MouseOver(d,i) {
+		function MouseOver(d, i) {
 			console.log(i.index);
 
 			// Store the currently hovered path
@@ -197,12 +199,21 @@ d3.json("data/Borough Boundaries.geojson")
 				.style("left", (d3.event.pageX + 10) + "px")
 				.style("top", (d3.event.pageY - 20) + "px");
 		}
+		function MouseClick(d, i) {
+			if(!moved){
+				svg.selectAll("path")
+				.attr("stroke", "white")
+				.attr("fill-opacity", opacity);
+				transitMap();
+			}else{
+				svg.selectAll("path")
+				.attr("stroke", "white")
+				.attr("fill-opacity", opacity);
+				transitMap();
+			}
+		}
 
 		function MouseOut() {
-			// Change the contour color to black on mouseover
-			d3.select(this)
-				.attr("stroke", "white");
-
 			// Store the currently hovered path
 			currentPath = this;
 
@@ -264,8 +275,8 @@ d3.json("data/Borough Boundaries.geojson")
 						.enter()
 						.append("line")
 						.attr("x1", chart_start)
-						.attr("y1", (d,i) => 1000 / 2 + scale_pos[i])
-						.attr("y2", (d,i) => 1000 / 2 + scale_pos[i])
+						.attr("y1", (d,i) => line_start + scale_pos[i])
+						.attr("y2", (d,i) => line_start + scale_pos[i])
 						.attr("stroke", "grey")
 						.attr("stroke-width", 1)
 						.attr("fill-opacity", 0)
@@ -281,14 +292,14 @@ d3.json("data/Borough Boundaries.geojson")
 						.append("line")
 						.attr("x1", chart_start)
 						.attr("x2", chart_start)
-						.attr("y1", 1000/2 - 1)
+						.attr("y1", line_start - 1)
 						.attr("stroke", "grey")
 						.attr("stroke-width", 2)
 						.attr("fill-opacity", 0)
-						.attr("y2", 1000/2)
+						.attr("y2", line_start)
 						.transition()
 						.duration(1000)
-						.attr("y2", 1000/2 + max_height*max_percentage)
+						.attr("y2", line_start + max_height*max_percentage)
 						.attr("fill-opacity", 0.05);
 
 
@@ -298,7 +309,7 @@ d3.json("data/Borough Boundaries.geojson")
 						.enter()
 						.append("text")
 						.attr("x", chart_start - 10)
-						.attr("y", function(d,i) { return 1000/2 + scale_pos[i]; }) // Adjust the y-coordinate to position the text above the checkpoints
+						.attr("y", function(d,i) { return line_start + scale_pos[i]; }) // Adjust the y-coordinate to position the text above the checkpoints
 						.attr("text-anchor", "end")
 						.text(function(d, i) { 
 							if (i === 0){
@@ -310,6 +321,7 @@ d3.json("data/Borough Boundaries.geojson")
 							return parseFloat(d3.format("." + 2 + "f")(scale_value[i])).toLocaleString();
 						})
 						.attr("font-size", 14)
+						.attr("font-style", "italic")
 						.attr("fill", "black");
 
 					svg.selectAll("rect_barplot")
@@ -366,6 +378,20 @@ d3.json("data/Borough Boundaries.geojson")
 						.transition()
 						.duration(1000)
 						.attr("fill-opacity", 0.5);
+
+					svg.append("text")
+						.datum(Discription)
+						.attr("x", chart_start+20)
+						.attr("y", max_height*max_percentage + line_start-20)
+						.attr("text-anchor", "start")
+						.text(Discription[currentScaleIndex])
+						.attr("font-size", 30)
+						.attr("font-family", "Times New Roman")
+						.attr("font-style", "italic")
+						.attr("fill", "grey")
+						.transition()
+						.duration(1000)
+						.attr("fill-opacity", 0.5);
 				}
 				shape.transition().duration(500).attr("transform", transform);
 			});
@@ -381,7 +407,7 @@ d3.json("data/Borough Boundaries.geojson")
 			{ x: 800, y: 500, index: 3  },
 			{ x: 1000, y: 500, index: 4  },
 		];
-
+		var line_start = 500;
 		var chart_start = 100;
 
 		var moved = false;
@@ -455,8 +481,8 @@ d3.json("data/Borough Boundaries.geojson")
 					.enter()
 					.append("line")
 					.attr("x1", chart_start)
-					.attr("y1", (d,i) => 1000 / 2 + scale_pos[i])
-					.attr("y2", (d,i) => 1000 / 2 + scale_pos[i])
+					.attr("y1", (d,i) => line_start + scale_pos[i])
+					.attr("y2", (d,i) => line_start + scale_pos[i])
 					.attr("stroke", "grey")
 					.attr("stroke-width", 1)
 					.attr("fill-opacity", 0)
@@ -472,14 +498,14 @@ d3.json("data/Borough Boundaries.geojson")
 					.append("line")
 					.attr("x1", chart_start)
 					.attr("x2", chart_start)
-					.attr("y1", 1000/2 - 1)
+					.attr("y1", line_start - 1)
 					.attr("stroke", "grey")
 					.attr("stroke-width", 2)
 					.attr("fill-opacity", 0)
-					.attr("y2", 1000/2)
+					.attr("y2", line_start)
 					.transition()
 					.duration(1000)
-					.attr("y2", 1000/2 + max_height*max_percentage)
+					.attr("y2", line_start + max_height*max_percentage)
 					.attr("fill-opacity", 0.05);
 
 
@@ -489,7 +515,7 @@ d3.json("data/Borough Boundaries.geojson")
 					.enter()
 					.append("text")
 					.attr("x", chart_start - 10)
-					.attr("y", function(d,i) { return 1000/2 + scale_pos[i]; }) // Adjust the y-coordinate to position the text above the checkpoints
+					.attr("y", function(d,i) { return line_start + scale_pos[i]; }) // Adjust the y-coordinate to position the text above the checkpoints
 					.attr("text-anchor", "end")
 					.text(function(d, i) { 
 						if (i === 0){
@@ -501,6 +527,7 @@ d3.json("data/Borough Boundaries.geojson")
 						return parseFloat(d3.format("." + 2 + "f")(scale_value[i])).toLocaleString();
 					})
 					.attr("font-size", 14)
+					.attr("font-style", "italic")
 					.attr("fill", "black");
 
 				console.log(normed);
@@ -546,9 +573,9 @@ d3.json("data/Borough Boundaries.geojson")
 
 				svg.append("line")
 					.attr("x1", chart_start )
-					.attr("y1", 1000 / 2)
+					.attr("y1", line_start)
 					.attr("x2", 1050 + chart_start)
-					.attr("y2", 1000 / 2)
+					.attr("y2", line_start)
 					.attr("stroke", "black")
 					.attr("stroke-width", 2)
 					.attr("fill-opacity", 0)
@@ -619,6 +646,20 @@ d3.json("data/Borough Boundaries.geojson")
 					.attr("font-family", "Times New Roman")
 					.attr("font-style", "italic")
 					.attr("fill", "black")
+					.transition()
+					.duration(1000)
+					.attr("fill-opacity", 0.5);
+
+				svg.append("text")
+					.datum(Discription)
+					.attr("x", chart_start + 20)
+					.attr("y", max_height * max_percentage + line_start - 20)
+					.attr("text-anchor", "start")
+					.text(Discription[currentScaleIndex])
+					.attr("font-size", 30)
+					.attr("font-family", "Times New Roman")
+					.attr("font-style", "italic")
+					.attr("fill", "grey")
 					.transition()
 					.duration(1000)
 					.attr("fill-opacity", 0.5);
