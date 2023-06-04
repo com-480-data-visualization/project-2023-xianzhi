@@ -3,9 +3,17 @@
 <head>
   <title>Plotting GeoJSON with D3.js</title>
   <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+  <style>
+    #chart-container {
+      width: 100%;
+      height: 500px;
+    }
+  </style>
 </head>
 <body>
   <svg id="map" width="1600" height="900"></svg>
+
   
   <div id="buttons">
     <button id="scale1">Actual Area</button>
@@ -14,6 +22,9 @@
     <button id="moveButton">Horizontal</button>
   </div>
 
+  <div id="chart-container"></div>
+  
   <script src="src/2D_map.js"></script>
+  <script src="src/Sankey.js"></script>
 </body>
 </html>

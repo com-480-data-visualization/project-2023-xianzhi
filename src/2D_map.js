@@ -1,4 +1,4 @@
-d3.json("Borough Boundaries.geojson")
+d3.json("data/Borough Boundaries.geojson")
       .then(function(data) {
         // Create an SVG element
         var svg = d3.select("#map");
@@ -171,7 +171,7 @@ d3.json("Borough Boundaries.geojson")
 				})
 				.transition()
 				.duration(transitionDuration)
-				.attr("fill-opacity", 0.3); // Adjust the opacity as desired
+				.attr("fill-opacity", 0.2); // Adjust the opacity as desired
 			
 			svg.selectAll("rect")
 				.filter(function(d,i){
@@ -217,6 +217,7 @@ d3.json("Borough Boundaries.geojson")
 			// Reduce the opacity of other paths
 			svg.selectAll("path")
 				.transition()
+				.attr("stroke", "white")
 				.duration(transitionDuration)
 				.attr("fill-opacity", opacity); // Adjust the opacity as desired
 
