@@ -120,6 +120,7 @@ Fig. 3 The primary 3D map of Manhattan
 
 * To access the Website: [Click here](https://com-480-data-visualization.github.io/project-2023-xianzhi/)
 * To access the Screencast: [Click here](https://github.com/com-480-data-visualization/project-2023-xianzhi/blob/master/Xianzhi.mp4)
+  （P.S. To have a look at the full functions (this video is out of time limitation) please [Click here].(https://github.com/com-480-data-visualization/project-2023-xianzhi/blob/master/full_record.mp4))
 * To access the Process Book: [Click here](process_book.pdf)
 
 
