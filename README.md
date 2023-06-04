@@ -119,7 +119,7 @@ Fig. 3 The primary 3D map of Manhattan
 ## Milestone 3 (4th June, 5pm)
 
 * To access the Website: Click here
-* To access the Screencast: Click here
+* To access the Screencast: [Click here] (Xianzhi.mp4)
 * To access the Process Book: [Click here](process_book.pdf)
 
 
