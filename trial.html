@@ -22,6 +22,10 @@
       width: 100%;
       height: 500px;
     }
+    #chart-container2 {
+      width: 100%;
+      height: 500px;
+    }
   </style>
 	 <!-- Load AMD modules: the application itself and D3  -->
     <script>
@@ -142,17 +146,37 @@
 		 <p> We see that Queens is the biggest in terms of Actual area size, while Manhattan is the smallest. </p>
 		 <p> Even though Manhattan is the smallest in size, it actually contains the highest number of Airbnb listings. As we can see, the majority of Airbnb listings are concentrated in Manhattan and Brooklyn. </p>
 		 <p> Manhattan is also the most expensive neighbourhood to stay in, with the price per night averaging around 197 USD per night. On the contrary, the Bronx is the most affordable neighbourhood with the average Airbnb accomodation listed for 87 USD. </p>
+    </div>
   <div class = "left-half">
     <div id="chart-container"></div>
   </div>
+  <script src="src/Sankey.js"></script>
 </div>
    </section>
     <section class="dotplot">
+      
+    <div class="container2">
   <h1 class="portfolio-title">Number of reviews</h1>
   <div class="bio-content"
 		 <p> The dot plot shows us the number of reviews per month as well as the distribution of reviews per month.</p>
 		 <p> Manhattan has the highest number of reviews.</p>
 		 <p> On average, the number of reviews posted were the highest for the month of June. </p>
+    </div>
+    <div class = "left-half-higher">
+      <div id="chart-container"></div>
+    </div>
+  </div>
+   </section>
+
+   <section class="scatter plot">
+      
+  <h1 class="portfolio-title-full">Princing & Reviews</h1>
+  <div class="bio-content-full"<p> The data is divided by 20th quantile. For every district, 20 groups are formed and ploted.</p>
+		 <p> The size of each dot corresponds to the number of records in each group. Bigger the dot, larger the number.</p>
+		 <p> On this plot, we can observe that the higher the price the lower the reviews. This applies to most regions except for Brooklyn.</p>
+    </div>
+  <div id="chart-container2"></div>
+  <script src="src/Scatter.js"></script>
    </section>
    
     <section class="3dmap">
@@ -168,9 +192,6 @@
     </div>
     <div id="viewDiv"></div>
 	 </section>
-	 
-	 
-          
     </main>    <footer class="footer">
         <div id="particles2"><canvas class="particles-js-canvas-el" width="1127" height="835" style="width: 100%; height: 100%;"></canvas></div>
         <div class="inner">
@@ -182,7 +203,6 @@
         </div>
     </footer>
     <script src="http://www.fabiolamanna.it/assets/js/particles.min.js"></script>    <script src="http://www.fabiolamanna.it/assets/js/main.min.js"></script>
-	<script src="src/Sankey.js"></script>
-
+	
 </body>
 </html>

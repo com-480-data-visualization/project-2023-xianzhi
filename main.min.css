@@ -230,6 +230,14 @@ main {
     height: 100%;
     background-color: white;
 }
+.left-half-higher {
+    position: absolute;
+    top: 0%;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: white;
+}
 .bio-content {
     max-width: 60rem;
     margin: 0 0 0 50%;
@@ -269,6 +277,15 @@ main {
     font-weight: 700;
     display: block;
     width: 50%;
+    padding: 0 3rem 3rem;
+    margin: 0 0 0 auto
+}
+
+.portfolio-title-full {
+    font-size: 2.8rem;
+    font-weight: 700;
+    display: block;
+    width: 100%;
     padding: 0 3rem 3rem;
     margin: 0 0 0 auto
 }
