@@ -6,7 +6,7 @@ d3.json("data/Borough Boundaries.geojson")
 		var translation = [800 / 2, 600 / 2];
         const projection = d3.geoNaturalEarth1()
           .rotate([0, 0])
-          .center([-74, 40.7]) // WorldSpace: Latitude and longitude of the center of Switzerland
+          .center([-73.85, 40.6]) // WorldSpace: Latitude and longitude of the center of Switzerland
           .scale(53000)
           .translate([800 / 2, 600 / 2]) // SVG space
           .precision(.1);
@@ -86,6 +86,7 @@ d3.json("data/Borough Boundaries.geojson")
 						.attr("fill", colors[index % colors.length])
 						.attr("fill-opacity", opacity)
 						.attr("stroke", "white")
+						.attr("stroke-opacity", opacity)
 						.on("mouseover", MouseOver)
 						.on("click", MouseClick)
 						.on("mouseout", MouseOut);
@@ -157,6 +158,7 @@ d3.json("data/Borough Boundaries.geojson")
 				.transition()
 				.duration(transitionDuration)
 				.attr("stroke", "black")
+				.attr("stroke-opacity", opacity)
 				.attr("fill-opacity", 0.9);
 
 			svg.selectAll("path")
@@ -203,11 +205,13 @@ d3.json("data/Borough Boundaries.geojson")
 			if(!moved){
 				svg.selectAll("path")
 				.attr("stroke", "white")
+				.attr("stroke-opacity", opacity)
 				.attr("fill-opacity", opacity);
 				transitMap();
 			}else{
 				svg.selectAll("path")
 				.attr("stroke", "white")
+				.attr("stroke-opacity", opacity)
 				.attr("fill-opacity", opacity);
 				transitMap();
 			}
@@ -229,6 +233,7 @@ d3.json("data/Borough Boundaries.geojson")
 			svg.selectAll("path")
 				.transition()
 				.attr("stroke", "white")
+				.attr("stroke-opacity", opacity)
 				.duration(transitionDuration)
 				.attr("fill-opacity", opacity); // Adjust the opacity as desired
 
@@ -400,14 +405,14 @@ d3.json("data/Borough Boundaries.geojson")
 		};
 
 		// Define the target locations for each shape
+		var line_start = 600;
 		var targetLocations = [
-			{ x: 200, y: 500, index: 0 },
-			{ x: 400, y: 500, index: 1  },
-			{ x: 600, y: 500, index: 2  },
-			{ x: 800, y: 500, index: 3  },
-			{ x: 1000, y: 500, index: 4  },
+			{ x: 200, y: line_start, index: 0 },
+			{ x: 400, y: line_start, index: 1  },
+			{ x: 600, y: line_start, index: 2  },
+			{ x: 800, y: line_start, index: 3  },
+			{ x: 1000, y: line_start, index: 4  },
 		];
-		var line_start = 500;
 		var chart_start = 100;
 
 		var moved = false;
@@ -426,7 +431,7 @@ d3.json("data/Borough Boundaries.geojson")
 			};
 		}
 
-		var max_height = 500;
+		var max_height = 600;
 		var max_percentage = 0.7;
 
 		var scale_pos = [0, max_height * 0.15, max_height * 0.3, max_height * 0.45, max_height * 0.6];
@@ -577,6 +582,7 @@ d3.json("data/Borough Boundaries.geojson")
 					.attr("x2", 1050 + chart_start)
 					.attr("y2", line_start)
 					.attr("stroke", "black")
+					.attr("stroke-opacity", opacity)
 					.attr("stroke-width", 2)
 					.attr("fill-opacity", 0)
 					.transition()
@@ -622,7 +628,6 @@ d3.json("data/Borough Boundaries.geojson")
 					.attr("text-anchor", "middle")
 					.text(function(d, i) { return d; })
 					.attr("font-size", 16)
-					.attr("font-family", "Times New Roman")
 					.attr("font-style", "italic")
 					.attr("fill", "black")
 					.transition()
@@ -643,7 +648,6 @@ d3.json("data/Borough Boundaries.geojson")
 						return d3.format("." + data_precision[currentScaleIndex] + "f")(district_data[currentScaleIndex][i]);
 					})
 					.attr("font-size", 16)
-					.attr("font-family", "Times New Roman")
 					.attr("font-style", "italic")
 					.attr("fill", "black")
 					.transition()
@@ -693,6 +697,29 @@ d3.json("data/Borough Boundaries.geojson")
         // Initial map rendering
         initializeMap();
 
+		var lastScrollTop = 0;
+
+		window.addEventListener("scroll", function() {
+			var currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+			if (currentScrollTop > lastScrollTop) {
+				// Scrolling down
+				if(currentScrollTop > 1800){
+					if(!moved){
+						transitMap()
+					}
+				}
+			} else if (currentScrollTop < lastScrollTop) {
+				// Scrolling up
+				if(currentScrollTop < 1400){
+					if(moved){
+						transitMap()
+					}
+				}
+			}
+
+			lastScrollTop = currentScrollTop;
+		});
       })
       .catch(function(error) {
         console.log("Error loading GeoJSON file:", error);

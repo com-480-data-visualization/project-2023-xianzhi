@@ -105,38 +105,47 @@
     <!-- Bio Block -->
     <section class="bio">
         <h1 class="bio-title">Exploring the Airbnb market in New York City in 2019</h1>
-        <div class="bio-content"><p>We plan to build a user-friendly and aesthetically pleasing web page that is based on historical Airbnb data.</p><p>By mainly implementing a 3D interactive map of the region of 
+        
+        <div class="bio-content-full"><p>We plan to build a user-friendly and aesthetically pleasing web page that is based on historical Airbnb data.</p><p>By mainly implementing a 3D interactive map of the region of 
 		interest, which incorporates the colored map of the 3D city with different layers of information, we hope to present an intuitive way to demonstrate the data for users with
 		different needs.</p><p>Our motivation is that, firstly, we think the traditional 2D view of Airbnb's official website is neither intuitive nor informative, and we want to create a different
 		visualization that not only contains denser information but is also easy for the users to get a total understanding of the Airbnb market in the region.</p></div>
+    
     </section>
 
         <section class="2dmap">
+          <div class="container">
         <h1 class="portfolio-title">New York City Boroughs</h1>
-		 <div class="bio-content"<p> New York City is composed of five main boroughs: Staten Island, Bronx, Manhattan, Brooklyn and Queens. </p>
+		<div class="bio-content"<p> New York City is composed of five main boroughs: Staten Island, Bronx, Manhattan, Brooklyn and Queens. </p>
 		 <p> We see that Queens is the biggest in terms of Actual area size, while Manhattan is the smallest. </p>
 		 <p> Even though Manhattan is the smallest in size, it actually contains the highest number of Airbnb listings. As we can see, the majority of Airbnb listings are concentrated in Manhattan and Brooklyn. </p>
 		 <p> Manhattan is also the most expensive neighbourhood to stay in, with the price per night averaging around 197 USD per night. On the contrary, the Bronx is the most affordable neighbourhood with the average Airbnb accomodation listed for 87 USD. </p>
-</div>
-		<svg id="map" width="1600" height="800" ></svg>
-  
-  <div id="buttons">
-    <button id="scale1">Actual Area</button>
-    <button id="scale2">Num. Posts</button>
-    <button id="scale3">Avg. Price</button>
-    <button id="moveButton">Horizontal</button>
+    </div>
+    <div class = "left-half">
+		<svg id="map" width="1600" height="1100" ></svg>
+    <div id="buttons">
+      <button class="button button1" id="scale1">Actual Area</button>
+      <button class="button button2" id="scale2">Num. Posts</button>
+      <button class="button button3" id="scale3">Avg. Price</button>
+    </div>
+  </div>
+    
   </div>
 
-  <script src="src/2D_map.js"></script>
+    <script src="src/2D_map.js"></script>
   </section>
   
   <section class="sankey">
+    <div class="container2">
   <h1 class="portfolio-title">Sankey Chart</h1>
   <div class="bio-content"<p> New York City is composed of five main boroughs: Staten Island, Bronx, Manhattan, Brooklyn and Queens. </p>
 		 <p> We see that Queens is the biggest in terms of Actual area size, while Manhattan is the smallest. </p>
 		 <p> Even though Manhattan is the smallest in size, it actually contains the highest number of Airbnb listings. As we can see, the majority of Airbnb listings are concentrated in Manhattan and Brooklyn. </p>
 		 <p> Manhattan is also the most expensive neighbourhood to stay in, with the price per night averaging around 197 USD per night. On the contrary, the Bronx is the most affordable neighbourhood with the average Airbnb accomodation listed for 87 USD. </p>
-  <div id="chart-container"></div>
+  <div class = "left-half">
+    <div id="chart-container"></div>
+  </div>
+</div>
    </section>
     <section class="3dmap">
 	<h1 class="portfolio-title">3D Map of New York City</h1>
