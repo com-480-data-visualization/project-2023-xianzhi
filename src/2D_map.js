@@ -39,10 +39,6 @@ d3.json("data/Borough Boundaries.geojson")
 			{ x: 0, y: 0 },
 			{ x: 0, y: 0 },
 		];
-		var tooltip = d3.select("body")
-						.append("div")
-						.attr("class", "tooltip")
-						.style("opacity", 0);
 
         var currentScaleIndex = 0; // Index of the currently selected scale
 		// Set the transition duration in milliseconds
@@ -193,13 +189,6 @@ d3.json("data/Borough Boundaries.geojson")
 				.attr('y', (d,i) => targetLocations[d.index].y + normed[d.index] + 20)
 				.attr("font-size", 20);
 
-			// Show the tooltip with the name of the shape
-			tooltip.transition()
-				.duration(200)
-				.style("opacity", 0.9);
-			tooltip.html(i.name)
-				.style("left", (d3.event.pageX + 10) + "px")
-				.style("top", (d3.event.pageY - 20) + "px");
 		}
 		function MouseClick(d, i) {
 			if(!moved){
@@ -242,10 +231,6 @@ d3.json("data/Borough Boundaries.geojson")
 				.duration(transitionDuration)
 				.attr("fill-opacity", 0.3); // Adjust the opacity as desired
 
-			// Hide the tooltip
-			tooltip.transition()
-				.duration(200)
-				.style("opacity", 0);
 		}
 
 		function updateMap() {
