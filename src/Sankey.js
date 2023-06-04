@@ -46,7 +46,11 @@ fetch("data/counts.json")
             trigger: 'item',
             triggerOn: 'mousemove',
             formatter: function(arg) {
-                return arg.data.source + ' - ' + arg.data.target+ ': Posts number: ' + arg.data.value ;
+                if(arg.dataType === "node"){
+                    console.log(arg);
+                    return arg.data.name + ': Total post number: ' + arg.value;
+                }
+                return arg.data.source + ' - ' + arg.data.target+ ': Post number: ' + arg.data.value ;
             }
         },
         series: {
