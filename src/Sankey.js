@@ -4,7 +4,15 @@ var option;
 fetch("data/counts.json")
   .then(response => response.json())
   .then(json => {    
-    var nodes = [];
+    var colors = ["steelblue", "green", "red", "orange", "purple"];
+    
+    var nodes = [
+        {'name': 'Staten Island','itemStyle':{'color':"steelblue"}},
+        {'name': 'Bronx','itemStyle':{'color':"green"}},
+        {'name': 'Manhattan','itemStyle':{'color':"red"}},
+        {'name': 'Brooklyn','itemStyle':{'color':"orange"}},
+        {'name': 'Queens','itemStyle':{'color':"purple"}},
+    ];
     var links = [];
     json.forEach(function(item) {
       var sourceNode = nodes.find(function(node) {
@@ -12,6 +20,7 @@ fetch("data/counts.json")
       });
     
       if (!sourceNode) {
+        if(item.source === "")
         sourceNode = { name: item.source };
         nodes.push(sourceNode);
       }
@@ -35,7 +44,10 @@ fetch("data/counts.json")
     option = {
         tooltip: {
             trigger: 'item',
-            triggerOn: 'mousemove'
+            triggerOn: 'mousemove',
+            formatter: function(arg) {
+                return arg.data.source + ' - ' + arg.data.target+ ': Posts number: ' + arg.data.value ;
+            }
         },
         series: {
           type: 'sankey',
@@ -44,12 +56,32 @@ fetch("data/counts.json")
             focus: 'adjacency'
           },
           data: nodes,
-          links: links
+          links: links,
+          lineStyle: {
+            color: 'gradient',
+            curveness: 0.5
+          },
+          levels: [
+            {
+              depth: 0,
+              itemStyle: {
+                opacity: 0.7,
+              },
+              lineStyle: {
+                color: "gradient",
+                opacity: 0.6,
+              },
+            },
+            {
+              depth: 1,
+              lineStyle: {
+                color: "gradient",
+                opacity: 0.6,
+              },
+            }
+            ]
         },
-        lineStyle: {
-          color: 'source',
-          curveness: 0.5
-        }
+        
       };
       
       option && myChart.setOption(option);
